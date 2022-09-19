@@ -19,7 +19,10 @@ describe 'Verify reset password request API' do
 
       response '200', 'request sent' do
         let(:user) { User.find_by(email: 'user@jitera.com') || FactoryBot.create(:user, email: 'user@jitera.com') }
-        let(:token) { user.generate_reset_password_token }
+        let(:token) {
+          user.generate_reset_password_token
+          user.reset_password_token
+        }
 
         examples 'application/json' => {
           success: true
