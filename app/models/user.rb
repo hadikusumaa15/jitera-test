@@ -22,6 +22,8 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :recipes
 
+  scope :password_resettable, ->(reset_password_token:) { where.not(reset_password_token: nil).find_by(reset_password_token: reset_password_token) }
+
   def self.associations
     [:recipes]
   end
