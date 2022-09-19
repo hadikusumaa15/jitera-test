@@ -46,7 +46,7 @@ describe 'Sign up user by email API' do
 
       response '200', 'Cannot register' do
         examples 'application/json' => {
-          error_message: I18n.t('email_login.failed_to_sign_up')
+          error_message: 'email is invalid'
         }
 
         let(:owner_fields) do
@@ -59,7 +59,7 @@ describe 'Sign up user by email API' do
         run_test! do |response|
           data = JSON.parse(response.body)
 
-          expect(data['error_message']).to eq(I18n.t('email_login.failed_to_sign_up'))
+          expect(data['error_message']).to eq('email is invalid')
         end
       end
     end

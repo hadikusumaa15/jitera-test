@@ -38,6 +38,25 @@ class User < ApplicationRecord
     raw
   end
 
+  def create_access_token
+    app = Doorkeeper::Application.find_by(name: 'Jitera App')
+
+    if app.blank?
+      app = Doorkeeper::Application.new(name: 'Jitera App', uid: 1, secret: '123', redirect_uri: 'https://www.google.com')
+      app.save
+    end
+
+    token = Devise.token_generator.generate(Doorkeeper::AccessToken, :token).join
+
+    access_token = Doorkeeper::AccessToken.new(resource_owner_id: self.id, application_id: app.id, token: token, created_at: Date.today)
+
+    access_token.save(validate: false)
+  end
+
+  def access_token
+    Doorkeeper::AccessToken.find_by(resource_owner_id: self.id)
+  end
+
   class << self
     def timeout_in
       0.hours

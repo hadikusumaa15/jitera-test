@@ -54,7 +54,7 @@ describe 'Send OTP codes API' do
 
       response '200', 'Cannot register' do
         examples 'application/json' => {
-          error_message: '許可されていない動作です'
+          error_message: 'User not found!'
         }
 
         let(:owner_fields) do
@@ -67,7 +67,7 @@ describe 'Send OTP codes API' do
         run_test! do |response|
           data = JSON.parse(response.body)
 
-          expect(data['error_message']).to eq('許可されていない動作です')
+          expect(data['error_message']).to eq('User not found!')
         end
       end
     end

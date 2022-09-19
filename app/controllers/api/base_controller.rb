@@ -50,5 +50,18 @@ module Api
     def base_render_record_not_unique
       render json: { message: I18n.t('errors.record_not_uniq_error') }, status: :forbidden
     end
+
+    def parse_error_message(record)
+      record.errors.present? ? parse_errors(record) : ''
+    end
+  
+    def parse_errors(record)
+      record.errors.messages.map { |k,v| k.to_s + ' ' +  v.join(' ').to_s }.join(', ')
+    end
+
+    def set_default_response
+      @success = false
+      @error_message = 'User not found!'
+    end
   end
 end
