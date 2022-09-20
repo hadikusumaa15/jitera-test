@@ -53,4 +53,25 @@ RSpec.describe Recipe, type: :model do
 
     it { is_expected.to validate_presence_of(:difficulty) }
   end
+
+  describe 'User Rating' do
+    let(:recipe_a) do
+      create(:recipe)
+    end
+
+    describe 'value' do
+      it 'is calculated by average of all ratings' do
+        recipe_a
+
+        UserRating.create([
+          { user: User.first, rating_value: 3, recipe: recipe_a },
+          { user: User.first, rating_value: 3, recipe: recipe_a },
+          { user: User.first, rating_value: 2, recipe: recipe_a },
+          { user: User.first, rating_value: 2, recipe: recipe_a }
+        ])
+        expect(recipe_a.user_rating_value).to eq(2.5)
+      end
+    end
+  end
+
 end

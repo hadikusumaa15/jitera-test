@@ -33,6 +33,11 @@ class Recipe < ApplicationRecord
     [:ingredients]
   end
 
+  def user_rating_value
+    ratings = self.user_ratings.pluck(:rating_value)
+    ratings.compact.sum > 0 ? (ratings.compact.sum.to_f / ratings.count.to_f) : 0
+  end
+
   # jitera-anchor-dont-touch: reset_password
 
   class << self
