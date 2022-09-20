@@ -5,6 +5,8 @@ class Recipe < ApplicationRecord
 
   has_many :ingredients, dependent: :destroy
 
+  has_many :user_ratings, dependent: :destroy
+
   belongs_to :category
 
   belongs_to :user

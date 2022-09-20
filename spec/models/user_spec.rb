@@ -7,6 +7,7 @@ RSpec.describe User, type: :model do
 
   describe 'Assocations' do
     it { is_expected.to have_many(:recipes) }
+    it { is_expected.to have_many(:user_ratings) }
   end
 
   describe 'Valid subject' do
