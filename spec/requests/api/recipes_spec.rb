@@ -3,6 +3,7 @@ require 'swagger_helper'
 RSpec.describe 'api/recipes', type: :request do
   before do
     create(:recipe)
+    create(:recipe_fixed)
   end
 
   # jitera-hook-for-rswag-example
@@ -23,46 +24,27 @@ RSpec.describe 'api/recipes', type: :request do
         examples 'application/json' => {
           'recipes' => {
             'id' => 'integer',
-
             'created_at' => 'datetime',
-
             'updated_at' => 'datetime',
-
             'title' => 'string',
-
             'descriptions' => 'text',
-
             'time' => 'string',
-
             'difficulty' => 'enum_type',
-
             'category_id' => 'foreign_key',
-
             'ingredients' =>
-  [
-    {
-
-      'id' => 'integer',
-
-      'created_at' => 'datetime',
-
-      'updated_at' => 'datetime',
-
-      'unit' => 'enum_type',
-
-      'amount' => 'float',
-
-      'recipe_id' => 'foreign_key'
-
-    }
-  ],
-
+            [
+              {
+                'id' => 'integer',
+                'created_at' => 'datetime',
+                'updated_at' => 'datetime',
+                'unit' => 'enum_type',
+                'amount' => 'float',
+                'recipe_id' => 'foreign_key'
+              }
+            ],
             'user_id' => 'foreign_key'
-
           },
-
           'error_message' => 'string'
-
         }
 
         let(:resource_owner) { create(:user) }
@@ -145,23 +127,23 @@ RSpec.describe 'api/recipes', type: :request do
             'category_id' => 'foreign_key',
 
             'ingredients' =>
-  [
-    {
+      [
+        {
 
-      'id' => 'integer',
+          'id' => 'integer',
 
-      'created_at' => 'datetime',
+          'created_at' => 'datetime',
 
-      'updated_at' => 'datetime',
+          'updated_at' => 'datetime',
 
-      'unit' => 'enum_type',
+          'unit' => 'enum_type',
 
-      'amount' => 'float',
+          'amount' => 'float',
 
-      'recipe_id' => 'foreign_key'
+          'recipe_id' => 'foreign_key'
 
-    }
-  ],
+        }
+      ],
 
             'user_id' => 'foreign_key'
 
@@ -216,23 +198,23 @@ RSpec.describe 'api/recipes', type: :request do
             'category_id' => 'foreign_key',
 
             'ingredients' =>
-  [
-    {
+        [
+          {
 
-      'id' => 'integer',
+            'id' => 'integer',
 
-      'created_at' => 'datetime',
+            'created_at' => 'datetime',
 
-      'updated_at' => 'datetime',
+            'updated_at' => 'datetime',
 
-      'unit' => 'enum_type',
+            'unit' => 'enum_type',
 
-      'amount' => 'float',
+            'amount' => 'float',
 
-      'recipe_id' => 'foreign_key'
+            'recipe_id' => 'foreign_key'
 
-    }
-  ],
+          }
+        ],
 
             'user_id' => 'foreign_key'
 
@@ -303,39 +285,31 @@ RSpec.describe 'api/recipes', type: :request do
         examples 'application/json' => {
           'recipes' => {
             'id' => 'integer',
-
             'created_at' => 'datetime',
-
             'updated_at' => 'datetime',
-
             'title' => 'string',
-
             'descriptions' => 'text',
-
             'time' => 'string',
-
             'difficulty' => 'enum_type',
-
             'category_id' => 'foreign_key',
-
             'ingredients' =>
-  [
-    {
+            [
+              {
 
-      'id' => 'integer',
+                'id' => 'integer',
 
-      'created_at' => 'datetime',
+                'created_at' => 'datetime',
 
-      'updated_at' => 'datetime',
+                'updated_at' => 'datetime',
 
-      'unit' => 'enum_type',
+                'unit' => 'enum_type',
 
-      'amount' => 'float',
+                'amount' => 'float',
 
-      'recipe_id' => 'foreign_key'
+                'recipe_id' => 'foreign_key'
 
-    }
-  ],
+              }
+            ],
 
             'user_id' => 'foreign_key'
 
@@ -352,7 +326,7 @@ RSpec.describe 'api/recipes', type: :request do
     end
   end
 
-  path '/api/recipes' do
+  path '/api/recipes?title=sushi' do
     get 'List recipes' do
       tags 'filter'
       consumes 'application/json'
@@ -409,53 +383,33 @@ RSpec.describe 'api/recipes', type: :request do
       response '200', 'filter' do
         examples 'application/json' => {
           'total_pages' => 'integer',
-
           'recipes' =>
-        [
-          {
-
-            'id' => 'integer',
-
-            'created_at' => 'datetime',
-
-            'updated_at' => 'datetime',
-
-            'title' => 'string',
-
-            'descriptions' => 'text',
-
-            'time' => 'string',
-
-            'difficulty' => 'enum_type',
-
-            'category_id' => 'foreign_key',
-
-            'ingredients' =>
-        [
-          {
-
-            'id' => 'integer',
-
-            'created_at' => 'datetime',
-
-            'updated_at' => 'datetime',
-
-            'unit' => 'enum_type',
-
-            'amount' => 'float',
-
-            'recipe_id' => 'foreign_key'
-
-          }
-        ],
-
+            [
+              {
+                'id' => 'integer',
+                'created_at' => 'datetime',
+                'updated_at' => 'datetime',
+                'title' => 'string',
+                'descriptions' => 'text',
+                'time' => 'string',
+                'difficulty' => 'enum_type',
+                'category_id' => 'foreign_key',
+                'ingredients' =>
+                  [
+                    {
+                      'id' => 'integer',
+                      'created_at' => 'datetime',
+                      'updated_at' => 'datetime',
+                      'unit' => 'enum_type',
+                      'amount' => 'float',
+                      'recipe_id' => 'foreign_key'
+                    }
+                  ],
             'user_id' => 'foreign_key'
 
           }
         ],
-
           'error_message' => 'string'
-
         }
 
         let(:resource_owner) { create(:user) }
@@ -464,6 +418,54 @@ RSpec.describe 'api/recipes', type: :request do
         let(:params) {}
         run_test! do |response|
           expect(response.status).to eq(200)
+        end
+      end
+    end
+
+    get 'List title filtered recipes' do
+      tags 'filter'
+      consumes 'application/json'
+
+      security [bearerAuth: []]
+
+      response '200', 'filter' do
+        examples 'application/json' => {
+          'total_pages' => 'integer',
+          'recipes' =>
+            [
+              {
+                'id' => 'integer',
+                'created_at' => 'datetime',
+                'updated_at' => 'datetime',
+                'title' => 'string',
+                'descriptions' => 'text',
+                'time' => 'string',
+                'difficulty' => 'enum_type',
+                'category_id' => 'foreign_key',
+                'ingredients' =>
+                  [
+                    {
+                      'id' => 'integer',
+                      'created_at' => 'datetime',
+                      'updated_at' => 'datetime',
+                      'unit' => 'enum_type',
+                      'amount' => 'float',
+                      'recipe_id' => 'foreign_key'
+                    }
+                  ],
+            'user_id' => 'foreign_key'
+
+          }
+        ],
+          'error_message' => 'string'
+        }
+
+        let(:resource_owner) { create(:user) }
+        let(:token) { create(:access_token, resource_owner: resource_owner).token }
+        let(:Authorization) { "Bearer #{token}" }
+        run_test! do |response|
+          expect(response.status).to eq(200)
+          expect(JSON.parse(response.body)['recipes'].first['title']).to eq("Flame Champion Sushi")
         end
       end
     end
