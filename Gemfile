@@ -6,6 +6,7 @@ ruby '3.0.0'
 # Gems for all environments
 gem 'doorkeeper'
 gem 'doorkeeper-jwt'
+gem 'unitwise'
 
 gem 'active_model_serializers'
 gem 'aws-sdk-s3', require: false

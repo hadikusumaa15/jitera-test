@@ -19,7 +19,7 @@ class ChangeSchemaV1 < ActiveRecord::Migration[6.0]
   create_table :recipes do |t|
     t.string :title, null: false
     t.text :descriptions, null: false
-    t.string :time, null: false
+    t.integer :time, null: false
     t.integer :difficulty, null: false
     t.timestamps null: false
   end

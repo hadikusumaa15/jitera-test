@@ -53,10 +53,9 @@ class Api::RecipesController < Api::BaseController
     request.merge!('category_id' => params.dig(:recipes, :category_id))
     request.merge!('user_id' => params.dig(:recipes, :user_id))
 
-    if params[:title].present?
-      @recipes = Recipe.where("title LIKE ?", "%#{params[:title]}%")
-    else
-      @recipes = Recipe.all
-    end
+    @recipes = (@recipes || Recipe).where("title LIKE ?", "%#{params[:title]}%") if params[:title].present?
+    @recipes = (@recipes || Recipe).where(time: params[:min_time].to_i..params[:max_time].to_i) if params[:min_time].present? && params[:max_time].present?
+    @recipes = (@recipes || Recipe).where(difficulty: params[:difficulty]) if params[:difficulty].present?
+    @recipes = Recipe.all if params[:title].blank? && params[:min_time].blank? && params[:max_time].blank? && params[:difficulty].blank?
   end
 end
