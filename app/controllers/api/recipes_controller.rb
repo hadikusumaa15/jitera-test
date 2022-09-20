@@ -6,7 +6,7 @@ class Api::RecipesController < Api::BaseController
   # jitera-anchor-dont-touch: actions
   def destroy
     @recipe = Recipe.find_by(id: params[:id])
-    @error_message = true unless @recipe&.destroy
+    @error_message = 'failed to delete record!' unless @recipe&.destroy
   end
 
   def update

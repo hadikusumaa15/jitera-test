@@ -43,6 +43,9 @@ Rails.application.routes.draw do
     end
 
     resources :unit_converters, only: [:index]
+
+    resources :users_ratings, only: [:index, :create, :show, :update, :destroy] do
+    end
   end
 
   # jitera-anchor-dont-touch: webhooks

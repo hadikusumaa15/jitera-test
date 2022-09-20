@@ -182,37 +182,23 @@ RSpec.describe 'api/recipes', type: :request do
         examples 'application/json' => {
           'recipes' => {
             'id' => 'integer',
-
             'created_at' => 'datetime',
-
             'updated_at' => 'datetime',
-
             'title' => 'string',
-
             'descriptions' => 'text',
-
             'time' => 'string',
-
             'difficulty' => 'enum_type',
-
             'category_id' => 'foreign_key',
-
             'ingredients' =>
         [
           {
 
             'id' => 'integer',
-
             'created_at' => 'datetime',
-
             'updated_at' => 'datetime',
-
             'unit' => 'enum_type',
-
             'amount' => 'float',
-
             'recipe_id' => 'foreign_key'
-
           }
         ],
 
