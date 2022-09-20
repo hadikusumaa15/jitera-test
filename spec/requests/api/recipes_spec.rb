@@ -179,37 +179,6 @@ RSpec.describe 'api/recipes', type: :request do
         }
       }
       response '200', 'show' do
-        examples 'application/json' => {
-          'recipes' => {
-            'id' => 'integer',
-            'created_at' => 'datetime',
-            'updated_at' => 'datetime',
-            'title' => 'string',
-            'descriptions' => 'text',
-            'time' => 'string',
-            'difficulty' => 'enum_type',
-            'category_id' => 'foreign_key',
-            'ingredients' =>
-        [
-          {
-
-            'id' => 'integer',
-            'created_at' => 'datetime',
-            'updated_at' => 'datetime',
-            'unit' => 'enum_type',
-            'amount' => 'float',
-            'recipe_id' => 'foreign_key'
-          }
-        ],
-
-            'user_id' => 'foreign_key'
-
-          },
-
-          'error_message' => 'string'
-
-        }
-
         let(:resource_owner) { create(:user) }
         let(:token) { create(:access_token, resource_owner: resource_owner).token }
         let(:Authorization) { "Bearer #{token}" }
@@ -218,6 +187,7 @@ RSpec.describe 'api/recipes', type: :request do
 
         run_test! do |response|
           expect(response.status).to eq(200)
+          expect(JSON.parse(response.body)['recipe']['user_rating_value'].present?).to eq(true)
         end
       end
     end
@@ -452,6 +422,7 @@ RSpec.describe 'api/recipes', type: :request do
         run_test! do |response|
           expect(response.status).to eq(200)
           expect(JSON.parse(response.body)['recipes'].first['title']).to eq("Flame Champion Sushi")
+          expect(JSON.parse(response.body)['recipes'].first['user_rating_value'].present?).to eq(true)
         end
       end
     end

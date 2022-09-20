@@ -8,6 +8,7 @@ if @error_message.blank?
     json.time @recipe.time
     json.difficulty @recipe.difficulty
     json.category_id @recipe.category_id
+    json.user_rating_value @recipe.user_rating_value
 
     json.ingredients @recipe.ingredients do |ingredient|
       json.id ingredient.id
